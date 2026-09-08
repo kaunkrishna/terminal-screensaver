@@ -23,7 +23,6 @@ while true; do
         --anchor-canvas c \
         --anchor-text c \
         --random-effect \
-        --exclude-effects dev_worm \
         --no-eol \
         --no-restore-cursor &
 
