@@ -6,7 +6,7 @@ A simple terminal screensaver inspired by [Omarchy](https://omarchy.org/), power
 
 <p align="center">
   <img src="screensaver.gif" alt="Omarchy-style terminal screensaver">
-  <i>and many more effects (plays all TTE effects in random order)</i>
+  <i>* and many more effects (plays all TTE effects in random order)</i>
 </p>
 
 <br>
