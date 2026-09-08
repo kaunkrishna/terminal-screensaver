@@ -2,7 +2,13 @@
 
 A simple terminal screensaver inspired by [Omarchy](https://omarchy.org/), powered by [Terminal Text Effects](https://github.com/ChrisBuilds/terminaltexteffects).
 
-![Omarchy-style terminal screensaver](screensaver.gif)
+<p align="center">
+  <img src="screensaver.gif" alt="Omarchy-style terminal screensaver">
+</p>
+
+<p align="center">
+  <i>plays all TTE effects in random order</i>
+</p>
 
 <br>
 
