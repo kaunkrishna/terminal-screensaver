@@ -21,15 +21,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOGO_FILE="${1:-${SCREENSAVER_LOGO:-$SCRIPT_DIR/logo.txt}}"
 EXCLUDE="${SCREENSAVER_EXCLUDE:-dev_worm}"
 
-# All effects tte ships with (as of terminaltexteffects >= 0.11). We pick one
-# at random ourselves rather than relying on --random-effect / random_effect,
-# since that flag's syntax has changed across tte versions.
-ALL_EFFECTS=(beams binarypath blackhole bouncyballs bubbles burn colorshift
-  crumble decrypt dev_worm errorcorrect expand fireworks highlight laseretch
-  matrix middleout orbittingvolley overflow pour print rain randomsequence
-  rings scattered slice slide spotlights spray swarm sweep synthgrid
-  unstable vhstape waves wipe)
-
 if [[ ! -f "$LOGO_FILE" ]]; then
   echo "Logo file not found: $LOGO_FILE" >&2
   exit 1
@@ -56,38 +47,8 @@ tput civis         # hide cursor
 stty -echo -icanon time 0 min 0   # non-blocking, no-echo key reads
 clear
 
-# Build the pool of effects to choose from, honoring $EXCLUDE (comma-separated)
-IFS=',' read -r -a EXCLUDE_ARR <<< "$EXCLUDE"
-EFFECT_POOL=()
-for e in "${ALL_EFFECTS[@]}"; do
-  skip=0
-  for x in "${EXCLUDE_ARR[@]}"; do
-    [[ "$e" == "$x" ]] && skip=1 && break
-  done
-  [[ "$skip" -eq 0 ]] && EFFECT_POOL+=("$e")
-done
-[[ ${#EFFECT_POOL[@]} -eq 0 ]] && EFFECT_POOL=("${ALL_EFFECTS[@]}")
-
-# --- main loop: shuffle through every effect, no delay between them --------
-# QUEUE holds a shuffled copy of EFFECT_POOL. We pop from it each round; once
-# empty we reshuffle, so every effect plays once before any repeats.
-QUEUE=()
-
-refill_queue() {
-  QUEUE=("${EFFECT_POOL[@]}")
-  # Fisher-Yates shuffle
-  local i j tmp
-  for ((i = ${#QUEUE[@]} - 1; i > 0; i--)); do
-    j=$((RANDOM % (i + 1)))
-    tmp="${QUEUE[i]}"; QUEUE[i]="${QUEUE[j]}"; QUEUE[j]="$tmp"
-  done
-}
-
+# --- main loop: let tte pick a random effect each time, no delay -----------
 while true; do
-  [[ ${#QUEUE[@]} -eq 0 ]] && refill_queue
-  effect="${QUEUE[-1]}"
-  unset 'QUEUE[-1]'
-
   tte --input-file "$LOGO_FILE" \
       --frame-rate 120 \
       --canvas-width 0 \
@@ -95,7 +56,8 @@ while true; do
       --anchor-canvas c \
       --anchor-text c \
       --no-eol \
-      "$effect" \
+      --random-effect \
+      --exclude-effects "$EXCLUDE" \
       &
 
   TTE_PID=$!
