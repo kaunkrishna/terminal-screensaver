@@ -4,6 +4,8 @@ A simple terminal screensaver inspired by [Omarchy](https://omarchy.org/), power
 
 ![Omarchy-style terminal screensaver](screensaver.gif)
 
+<br>
+
 ## Features
 
 - Random terminal animations
@@ -11,11 +13,15 @@ A simple terminal screensaver inspired by [Omarchy](https://omarchy.org/), power
 - Press **any key** to exit
 - No GUI or desktop environment required
 
+<br>
+
 ## Requirements
 
 - Bash
 - Python & `pipx`
 - [Terminal Text Effects](https://github.com/ChrisBuilds/terminaltexteffects)
+
+<br>
 
 ## Installation
 
@@ -33,6 +39,8 @@ Make the screensaver executable:
 chmod +x screensaver.sh
 ```
 
+<br>
+
 ## Usage
 
 Run: 
@@ -43,12 +51,16 @@ Run:
 
 Press **any key** to exit.
 
+<br>
+
 ## Customizing
 
 The screensaver reads its ASCII artwork from `ascii.txt` in the directory. 
 Edit that file to change what is displayed.
 
 > **Note:** I'm also planning to make an Omarchy's font ASCII generator!
+
+<br>
 
 ## Credits
 
