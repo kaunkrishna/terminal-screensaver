@@ -1,4 +1,4 @@
-# Omarchy Terminal Screensaver
+ # Terminal Screensaver
 
 A simple terminal screensaver inspired by [Omarchy](https://omarchy.org/), powered by [Terminal Text Effects](https://github.com/ChrisBuilds/terminaltexteffects).
 
